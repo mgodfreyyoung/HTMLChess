@@ -1,0 +1,7 @@
+h3 {color:blue;font-style:italic}
+h2,h3 {text-align:center} 
+body {font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;}
+strong, em, b, i {font-family: "Lucida Sans", "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;}
+h2.chessbackgrd{background-image:url(chessbackgrd.gif)}
+p:first-letter{font-size:200%}
+#dataDiv { width:300px;text-align: center; height:20px; border-style:solid;border-width:1px;overflow: hidden;} 

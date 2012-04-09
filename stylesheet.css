@@ -1,0 +1,46 @@
+h2,h3 {text-align:center;width: 500px; color: Black} 
+body {BACKGROUND-COLOR:Silver; COLOR: black}
+table {width: 500px;BORDER-BOTTOM: black 2px solid; BORDER-LEFT: black 2px solid;  BORDER-TOP: black 2px solid; BORDER-RIGHT: black 2px solid}
+td{WIDTH: 40px; HEIGHT: 40px}
+td.w{BACKGROUND-COLOR: green}
+td.b{BACKGROUND-COLOR: teal; BORDER-COLOR: teal}
+h4 {position:absolute; top:0; left:0}
+#WPawn1 {position: relative; top: 0; left: 0;}
+#WPawn2 {position: relative; top: 0; left: 0;}
+#WPawn3 {position: relative; top: 0; left: 0;}
+#WPawn4 {position: relative; top: 0; left: 0;}
+#WPawn5 {position: relative; top: 0; left: 0;}
+#WPawn6 {position: relative; top: 0; left: 0;}
+#WPawn7 {position: relative; top: 0; left: 0;}
+#WPawn8 {position: relative; top: 0; left: 0;}
+#WRookL {position: relative; top: 0; left: 0;}
+#WRookR {position: relative; top: 0; left: 0;}
+#WKnightL {position: relative; top: 0; left: 0;}
+#WKnightR {position: relative; top: 0; left: 0;}
+#WBishopL {position: relative; top: 0; left: 0;}
+#WBishopR {position: relative; top: 0; left: 0;}
+#WQueen {position: relative; top: 0; left: 0;}
+#WKing {position: relative; top: 0; left: 0;}
+#BPawn1 {position: relative; bottom: 0; left: 0;}
+#BPawn2 {position: relative; bottom: 0; left: 0;}
+#BPawn3 {position: relative; bottom: 0; left: 0;}
+#BPawn4 {position: relative; bottom: 0; left: 0;}
+#BPawn5 {position: relative; bottom: 0; left: 0;}
+#BPawn6 {position: relative; bottom: 0; left: 0;}
+#BPawn7 {position: relative; bottom: 0; left: 0;}
+#BPawn8 {position: relative; bottom: 0; left: 0;}
+#BRookL {position: relative; bottom: 0; left: 0;}
+#BRookR {position: relative; bottom: 0; left: 0;}
+#BKnightL {position: relative; bottom: 0; left: 0;}
+#BKnightR {position: relative; bottom: 0; left: 0;}
+#BBishopL {position: relative; bottom: 0; left: 0;}
+#BBishopR {position: relative; bottom: 0; left: 0;}
+#BQueen {position: relative; bottom: 0; left: 0;}
+#BKing {position: relative; bottom: 0; left: 0;}
+#chessboardDiv {position: fixed; top: 0; left: 514}
+#blackPlayer {position:absolute; top: 350; left: 400}
+#whitePlayer {position:absolute; top: 29; left: 400}
+#enterNameDiv {position:absolute}
+#displayPieceDiv {position:absolute; top: 0; left:450}
+td#Clicked{BACKGROUND-COLOR:Blue;BORDER-COLOR:Black}
+#link{display:block;position:absolute;bottom:0;right:0;width:350px; }

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--Same structure as example on page 510 of JavaScript: The Definitive Guide (5th ed.), by David Flanagan.
+Note that embedded white space can cause problems when using the XML
+document with DOM functions.-->
+<contacts>
+<contact name="WBishopR"><row>7</row><column>6</column><display>img id = 'WBishopR',  src='pieces/White_Bishop.png', height=38 width=38</display></contact>
+<contact name="BRookL"><row>7</row><column>7</column><display>img id = 'BrookL',  src='pieces/Black_Rook.png', height=38 width=38</display></contact>
+<contact name="WPawn1"><row>6</row><column>7</column><display>img id = 'WPawn1', src='pieces/White_Pawn.png', height=38 width=38</display></contact>
+<contact name="BKing"><row>4</row><column>2</column><display>img id = 'BKing',  src='pieces/Black_King.png', height=38 width=38</display></contact>
+<contact name="BPawn1"><row>3</row><column>2</column><display>img id = 'BPawn1',  src='pieces/Black_Pawn.png', height=38 width=38</display></contact>
+<contact name="BPawn2"><row>3</row><column>3</column><display>img id = 'BPawn2',  src='pieces/Black_Pawn.png', height=38 width=38</display></contact>
+<contact name="BPawn3"><row>4</row><column>6</column><display>img id = 'BPawn3',  src='pieces/Black_Pawn.png', height=38 width=38</display></contact>
+<contact name="BPawn4"><row>2</row><column>8</column><display>img id = 'BPawn4',  src='pieces/Black_Pawn.png', height=38 width=38</display></contact>
+<contact name="BPawn5"><row>1</row><column>1</column><display>img id = 'BPawn5',  src='pieces/Black_Pawn.png', height=38 width=38</display></contact>
+<contact name="WKing"><row>2</row><column>4</column><display>img id = 'WKing',  src='pieces/White_King.png', height=38 width=38</display></contact>
+<contact name="WRook1"><row>0</row><column>1</column><display>img id = 'WRook1',  src='pieces/White_Rook.png', height=38 width=38</display></contact>
+
+</contacts>
+

@@ -1,0 +1,95 @@
+<!DOCTYPE html />
+<html>
+<head>
+    <title>Chess Game Home</title>
+    <link rel="stylesheet" type="text/css" href="style.css" title="Styles" />
+
+    <script type="text/javascript">
+        function openWindow() {
+            w = window.open("chessgame.html", "chessWindow");
+        }
+        function closeWindow() {
+            w.close();
+        }
+
+
+        function loadSyncPost() {
+            var name = document.getElementById('loginname').value;
+            var passWord = document.getElementById('pwd').value;
+            var data = "userName=" + name + "&password=" + passWord;
+            var localRequest = new XMLHttpRequest();
+            localRequest.open("POST", "http://universe.tc.uvu.edu/cs3550/assignments/PasswordCheck/check.php", false);
+            localRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            localRequest.send(data);
+            if (localRequest.status == 200) {
+                var dataDiv = document.getElementById("dataDiv");
+                var responseJson = JSON.parse(localRequest.responseText);
+                if (responseJson["result"] =="invalid") {
+
+                    dataDiv.innerHTML = "Sorry,invalid login name"
+                }
+                else {
+                    document.cookie = '3550timestamp=' + responseJson["userName"] + " " + responseJson["timestamp"];
+                    dataDiv.innerHTML = ""
+                    openWindow()
+                }
+             }
+            
+        }
+
+    </script>
+</head>
+<body>
+
+    <h2>
+        A Chess Game - to be played between two players...</h2>
+    <hr />
+    <div style="text-align: center">
+        <img src="chessboard.jpg">
+    </div>
+    <h3>
+        “All I want to do, ever, is just play Chess” - (Bobby Fischer)
+    </h3>
+    <hr />
+    (If unfamilier with the rules of chess, you might want to check out the web site
+    <a href="http://www.princeton.edu/~jedwards/cif/intro.html" target="_blank">Chess is
+        Fun</a>* by Jon Edwards, United States Correspondence Chess Champion.)
+    <p>
+        This HTML based game allows two players to compete against each other in the age
+        old game of chess. Each player will take turns in this game. First, all pieces are
+        set up on the board. Each player than enters their name and is assigned a color
+        (black or white). At this point, the game begins and the person playing the white
+        pieces moves first. After they have had a chance to move, their opponent will then
+        have their chance to move. After the opponent has had their chance to move, play
+        cycles back to the first person. The game continues like this until one of the two
+        players succeeds in capturing the other players king or a stalemate is reached.
+        This game will only allow for legitimate chess moves. At this time castling is not
+        supported. Good luck!
+        <p>
+
+                 Login Name:
+                <input id = "loginname" type="text" />
+                Password:
+                <input id = "pwd" type="password" />
+                <div  id='dataDiv' ></div>
+                <input type="button" value="Login" onclick="loadSyncPost()" />
+                <input type="button" value="Close Chess Window." onclick="closeWindow()" />
+
+
+
+            <p>
+                <hr>
+                <br>
+                *Permission for use granted by: <cite>Jon Edwards</cite>
+                <br>
+                Chess board image provided by <a href="http://free-extras.com" target="_blank">http://free-extras.com
+                </a>
+                <br>
+                ClipArt chess pieces on game page used under fair use doctrine and acquired through Google images.
+                <br>
+                This Site composed with care by: <cite>Michael Godfrey Young</cite>
+                <br>
+    &copy;2012 and beyond
+</body>
+</html>
+
