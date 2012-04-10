@@ -10,6 +10,9 @@ var flag1, flag2, flag3, flag4, flag5, flag6, flag7;
     var listRow = []
     var listCol = []
     var moveList = []
+    var clickedRow;
+    var clickedCol;
+    var resetClicked = false;
 
 // the following block is the variables to change the positions of the pieces...I went with simple letters to insure browser compatiablity...
 // create object literal array for chesspiece......the following row and column values can be modified to move the pieces.....
@@ -396,24 +399,40 @@ function addPosition() {
     var cell = gridTable.rows[row].cells[col];
     var extraStuff = document.getElementsByTagName('td');
 	alert(extraStuff[(row * 8) + col].innerHTML)
-	if (valid == true){
-		tryMove(tester,col,row)
-    } 
+    moveList = []
+        if (clickedRow == row && clickedCol == col){
+    	alert('already clicked')
+    	cell.id = '';
+    	resetClicked = true;
+
+    }
+    if (clickedRow == null){
     for (p in pieces) {
         if (row == pieces[p].row && col == pieces[p].column && pieces[p]){
         	pieceValid(p,col,row);
         	if (moveList.length != 0){
         		valid = true
- 				cell.id += "Clicked";   
+        		clickedRow = row;
+        		clickedCol = col;
+ 				cell.id = "Clicked";   
             	tester = pieces[p].piece;
            }
           }
+    }
+
+    }
+    if (resetClicked == true){
+    	clickedRow = null
+    	resetClicked = false
     }
     for (g in moveList){
     alert(moveList[g].row + ' ' + moveList[g].col)
 
     }
-    moveList = []
+    	if (moveList.length > 0){
+		tryMove(tester,col,row)
+    }
+
     var head = document.getElementById("header");
     var chr = String.fromCharCode(64 + col);
     head.innerHTML = "Col: " + chr + " Row: " + row;
@@ -424,6 +443,7 @@ function addPosition() {
     else {
         selectedPiece.innerHTML = "";
     }
+    
 
     
 }
@@ -481,7 +501,7 @@ function pieceValid(p,col,row){
 }
 function tryMove(tester,col,row){
 	
-
+	alert('test')
 	if (tester.substring(0, tester.length - 1) == 'BPawn'){
 	for (p in pieces){
 		if (pieces[p].piece == tester){
