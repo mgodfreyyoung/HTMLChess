@@ -9,6 +9,7 @@ var flag1, flag2, flag3, flag4, flag5, flag6, flag7;
     var listName = []
     var listRow = []
     var listCol = []
+    var moveList = []
 
 // the following block is the variables to change the positions of the pieces...I went with simple letters to insure browser compatiablity...
 // create object literal array for chesspiece......the following row and column values can be modified to move the pieces.....
@@ -399,13 +400,20 @@ function addPosition() {
 		tryMove(tester,col,row)
     } 
     for (p in pieces) {
-        if (row == pieces[p].row && col == pieces[p].column && pieces[p])
-        	if (pieceValid(p,col,row) == true){
+        if (row == pieces[p].row && col == pieces[p].column && pieces[p]){
+        	pieceValid(p,col,row);
+        	if (moveList.length != 0){
         		valid = true
  				cell.id += "Clicked";   
             	tester = pieces[p].piece;
            }
+          }
     }
+    for (g in moveList){
+    alert(moveList[g].row + ' ' + moveList[g].col)
+
+    }
+    moveList = []
     var head = document.getElementById("header");
     var chr = String.fromCharCode(64 + col);
     head.innerHTML = "Col: " + chr + " Row: " + row;
@@ -425,32 +433,46 @@ function pieceValid(p,col,row){
 	str = pieces[p].piece
 	var valid = true;
 	if (str.substring(0, str.length - 1) == 'BPawn'){
+		moveList.push({row: row - 1, col: col})
 		for (x in pieces) {
 			if (pieces[x].row == row - 1 && pieces[x].column == col){
-				valid = false
-				if (pieces[x].piece.charAt(0) == "W"){}
-					if (pieces[x].row == row - 1 && pieces[x].column - 1  == col){
-						return true
-					}
-					if (pieces[x].row == row - 1 && pieces[x].column + 1 == col){
-						return true
-					}
+				for (y in moveList){
+				if (moveList[y].row == row - 1 && moveList[y].col == col){
+					moveList.splice(y,1)
+				}
 				}
 			}
+			if (pieces[x].piece.charAt(0) == "W"){
+				if (pieces[x].row == row - 1 && pieces[x].column  == col - 1){
+						moveList.push({row: row - 1, col: col - 1})
+					}
+					if (pieces[x].row == row - 1 && pieces[x].column == col + 1){
+						moveList.push({row: row - 1, col: col + 1})
+					}
+				
+			}
+		}
 		
 	}
 		if (str.substring(0, str.length - 1) == 'WPawn'){
+		moveList.push({row: row + 1, col: col})
 		for (x in pieces) {
-		if (pieces[x].row == row + 1 && pieces[x].column == col){
-				valid = false
-				if (pieces[x].piece.charAt(0) == "W"){}
-					if (pieces[x].row == row + 1 && pieces[x].column - 1  == col){
-						return true
-					}
-					if (pieces[x].row == row + 1 && pieces[x].column + 1 == col){
-						return true
-					}
+			if (pieces[x].row == row + 1 && pieces[x].column == col){
+				for (y in moveList){
+				if (moveList[y].row == row + 1 && moveList[y].col == col){
+					moveList.splice(y,1)
 				}
+				}
+			}
+			if (pieces[x].piece.charAt(0) == "B"){
+				if (pieces[x].row == row + 1 && pieces[x].column  == col - 1){
+						moveList.push({row: row - 1, col: col - 1})
+					}
+					if (pieces[x].row == row + 1 && pieces[x].column == col + 1){
+						moveList.push({row: row - 1, col: col + 1})
+					}
+				
+			}
 		}
 		
 	}
