@@ -55,6 +55,9 @@ function writeboard() {
     var html = "";
 
 
+    // these letters are used on bottom of chess board, as per chess play convention...not to be confused with col and row numbers which are numaric and are used for positioning the pieces...
+    // I thought I should pass them to my function as well
+    var letters = new Array("a", "b", "c", "d", "e", "f", "g", "h");
     // Variable to set the size of board..
     var widthheight = 400;
 
@@ -65,21 +68,22 @@ function writeboard() {
     html += "<table id = 'chessTable' width =", widthheight, " height =", widthheight, " border='1'>";
 
     // for to create the table rows
-    for (rows = 0; rows < 8; rows++) {
+    for (rows = 9; rows > 0; rows--) {
 
         html += "<tr align='left'>";
 
         // test to see if we are still creating rows
-        if (rows < 8) {
-            for (columns = 0; columns < 8; columns++) {
+        if (rows > 1) {
+            for (columns = 0; columns < 9; columns++) {
+                if (columns > 0) {
                     html += "<td class=" + columns + rows + " style=padding-left:6px width='40px' height='40px' bgcolor='" + squareCol + "' align='center'>";
                     for (var i in pieces) {
-                        if (pieces[i].row == rows && pieces[i].column == columns && pieces[i].piece.charAt(0) == "W") {
+                        if (pieces[i].row == rows - 2 && pieces[i].column == columns && pieces[i].piece.charAt(0) == "W") {
                             html += "<font color=\"white\">" + pieces[i].display + "</font>";
                         }
                     }
                     for (var i in pieces) {
-                        if (pieces[i].row == rows && pieces[i].column == columns && pieces[i].piece.charAt(0) == "B") {
+                        if (pieces[i].row == rows - 2 && pieces[i].column == columns && pieces[i].piece.charAt(0) == "B") {
                             html += "<font color=\"black\">" + pieces[i].display + "</font>";
                         }
                     }
@@ -90,6 +94,20 @@ function writeboard() {
                     else {
                         squareCol = "teal";
                     }
+                }
+                else {
+                    html += "<td width='40px' height='40px'>" + (9 - parseInt(rows)) + "</td>";
+                }
+            }
+        }
+        else {
+            for (columns = 0; columns < 9; columns++) {
+                if (columns == 0) {
+                    html += "<td width='40px' height='40px'> </td>";
+                }
+                else {
+                    html += "<td width='40px' height='40px'>" + letters[columns - 1].toUpperCase() + "</td>";
+                }
             }
         }
         if (squareCol == "teal") {
@@ -187,162 +205,162 @@ function getCookie() {
 function resetPieces() {
 	pieces = [{
 		row : 0,
-		column : 0,
+		column : 1,
 		piece : "WRookL",
 		display : "<img id = 'WRookL',  src='pieces/White_Rook.png', height=38 width=38>"
 	}, {
 		row : 0,
-		column : 1,
+		column : 2,
 		piece : "WKnightL",
 		display : "<img id = 'WKnightL',  src='pieces/White_Knight.png', height=38 width=38>"
 	}, {
-		row : 5,
-		column : 2,
+		row : 0,
+		column : 3,
 		piece : "WBishopL",
 		display : "<img id = 'WBishopL',  src='pieces/White_Bishop.png', height=38 width=38>"
 	}, {
 		row : 0,
-		column : 3,
+		column : 4,
 		piece : "WQueen",
 		display : "<img id = 'WQuuen',  src='pieces/White_Queen.png', height=38 width=38>"
 	}, {
 		row : 0,
-		column : 4,
+		column : 5,
 		piece : "WKing",
 		display : "<img id = 'WKing',  src='pieces/White_King.png', height=38 width=38>"
 	}, {
 		row : 0,
-		column : 5,
+		column : 6,
 		piece : "WBishopR",
 		display : "<img id = 'WBishopR',  src='pieces/White_Bishop.png', height=38 width=38>"
 	}, {
 		row : 0,
-		column : 6,
+		column : 7,
 		piece : "WKnightR",
 		display : "<img id = 'WknightR',  src='pieces/White_Knight.png', height=38 width=38>"
 	}, {
 		row : 0,
-		column : 7,
+		column : 8,
 		piece : "WRookR",
 		display : "<img id = 'WRookR',  src='pieces/White_Rook.png', height=38 width=38>"
 	},{
 		row : 1,
-		column : 0,
+		column : 1,
 		piece : "WPawn1",
 		display : "<img id = 'WPawn1', src='pieces/White_Pawn.png', height=38 width=38>"
 	}, {
 		row : 1,
-		column : 1,
+		column : 2,
 		piece : "WPawn2",
 		display : "<img id = 'WPawn2', src='pieces/White_Pawn.png', height=38 width=38>"
 	}, {
 		row : 1,
-		column : 2,
+		column : 3,
 		piece : "WPawn3",
 		display : "<img id = 'WPawn3', src='pieces/White_Pawn.png', height=38 width=38>"
 	}, {
 		row : 1,
-		column : 3,
+		column : 4,
 		piece : "WPawn4",
 		display : "<img id = 'WPawn4',  src='pieces/White_Pawn.png', height=38 width=38>"
 	}, {
 		row : 1,
-		column : 4,
+		column : 5,
 		piece : "WPawn5",
 		display : "<img id = 'WPawn5',  src='pieces/White_Pawn.png', height=38 width=38>"
 	}, {
 		row : 1,
-		column : 5,
+		column : 6,
 		piece : "WPawn6",
 		display : "<img id = 'WPawn6',  src='pieces/White_Pawn.png', height=38 width=38>"
 	}, {
 		row : 1,
-		column : 6,
+		column : 7,
 		piece : "WPawn7",
 		display : "<img id = 'WPawn7',  src='pieces/White_Pawn.png', height=38 width=38>"
 	}, {
 		row : 1,
-		column : 7,
+		column : 8,
 		piece : "WPawn8",
 		display : "<img id = 'WPawn8',  src='pieces/White_Pawn.png', height=38 width=38>"
 	}, {
 		row : 6,
-		column : 0,
+		column : 1,
 		piece : "BPawn1",
 		display : "<img id = 'BPawn1', src='pieces/Black_Pawn.png', height=38 width=38>"
 	}, {
 		row : 6,
-		column : 1,
+		column : 2,
 		piece : "BPawn2",
 		display : "<img id = 'BPawn2',  src='pieces/Black_Pawn.png', height=38 width=38>"
 	}, {
 		row : 6,
-		column : 2,
+		column : 3,
 		piece : "BPawn3",
 		display : "<img id = 'BPawn3',  src='pieces/Black_Pawn.png', height=38 width=38>"
 	}, {
 		row : 6,
-		column : 3,
+		column : 4,
 		piece : "BPawn4",
 		display : "<img  id = 'BPawn4', src='pieces/Black_Pawn.png', height=38 width=38>"
 	},{
 		row : 6,
-		column : 4,
+		column : 5,
 		piece : "BPawn5",
 		display : "<img id = 'BPawn5',  src='pieces/Black_Pawn.png', height=38 width=38>"
 	}, {
 		row : 6,
-		column : 5,
+		column : 6,
 		piece : "BPawn6",
 		display : "<img id = 'BPawn6',  src='pieces/Black_Pawn.png', height=38 width=38>"
 	}, {
 		row : 6,
-		column : 6,
+		column : 7,
 		piece : "BPawn7",
 		display : "<img id = 'BPawn7',  src='pieces/Black_Pawn.png', height=38 width=38>"
 	}, {
 		row : 6,
-		column : 7,
+		column : 8,
 		piece : "BPawn8",
 		display : "<img id = 'BPawn8',  src='pieces/Black_Pawn.png', height=38 width=38>"
 	},{
 		row : 7,
-		column : 0,
+		column : 1,
 		piece : "BRookL",
 		display : "<img id = 'BrookL',  src='pieces/Black_Rook.png', height=38 width=38>"
 	}, {
 		row : 7,
-		column : 1,
+		column : 2,
 		piece : "BKnightL",
 		display : "<img id = 'BKnightL',  src='pieces/Black_Knight.png', height=38 width=38>"
 	}, {
 		row : 7,
-		column : 2,
+		column : 3,
 		piece : "BBishopL",
 		display : "<img id = 'BBishopL',  src='pieces/Black_Bishop.png', height=38 width=38>"
 	}, {
 		row : 7,
-		column : 3,
+		column : 4,
 		piece : "BQueen",
 		display : "<img id = 'BQueen',  src='pieces/Black_Queen.png', height=38 width=38>"
 	}, {
 		row : 7,
-		column : 4,
+		column : 5,
 		piece : "BKing",
 		display : "<img id = 'BKing',  src='pieces/Black_King.png', height=38 width=38>"
 	}, {
 		row : 7,
-		column : 5,
+		column : 6,
 		piece : "BBishopR",
 		display : "<img id = 'BBishopR',  src='pieces/Black_Bishop.png', height=38 width=38>"
 	}, {
 		row : 7,
-		column : 6,
+		column : 7,
 		piece : "BKnightR",
 		display : "<img id = 'BKnightR',  src='pieces/Black_Knight.png', height=38 width=38>"
 	}, {
 		row : 7,
-		column : 7,
+		column : 8,
 		piece : "BRookR",
 		display : "<img id = 'BRookR',  src='pieces/Black_Rook.png', height=38 width=38>"
 	}]
@@ -392,14 +410,17 @@ function addPosition() {
     var col = this.cellIndex;
     var row = this.parentNode.rowIndex;
     var cell = gridTable.rows[row].cells[col];
-    var extraStuff = document.getElementsByTagName('td');
-	alert(extraStuff[(row * 8) + col].innerHTML) 
+    alert(cell)
+    if (col != 0 && row != 8) {
+    	for (p in pieces) {
+        	if (row == pieces[p].row && col == pieces[p].column && pieces[p]){    			
+        			cell.id += "Clicked";
+        	}
+        	}
+    }
     for (p in pieces) {
         if (row == pieces[p].row && col == pieces[p].column && pieces[p])
-        	if (pieceValid(p,col,row) == true){;
- 				cell.id += "Clicked";   
-            	tester = pieces[p].piece;
-           }
+            tester = pieces[p].piece;
     }
     var head = document.getElementById("header");
     var chr = String.fromCharCode(64 + col);
@@ -412,25 +433,11 @@ function addPosition() {
         selectedPiece.innerHTML = "";
     }
 }
-function pieceValid(p,col,row){
+function pieceValid(){
 	str = pieces[p].piece
-	var valid = true;
 	if (str.substring(0, str.length - 1) == 'BPawn'){
-		for (x in pieces) {
-			if (pieces[x].row == row - 1 && pieces[x].column == col){
-				valid = false
-				if (pieces[x].piece.charAt(0) == "W"){}
-					if (pieces[x].row == row - 1 && pieces[x].column - 1  == col){
-						return true
-					}
-					if (pieces[x].row == row - 1 && pieces[x].column + 1 == col){
-						return true
-					}
-				}
-			}
-		
-		
+		alert("test")
 	}
-	return valid;
+	return false;
 	
 }
