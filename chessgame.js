@@ -4,6 +4,8 @@ var firstPlayer;
 var secondPlayer;
 var pieceToMove;
 var flag1, flag2, flag3, flag4, flag5, flag6, flag7;
+    var valid = false;
+    var tester;
     var listName = []
     var listRow = []
     var listCol = []
@@ -368,7 +370,7 @@ function getXML() {
 	listCol.push(xcolumn.firstChild.data);
 	listDisplay.push(xdisplay.firstChild.data);
 	}
-	alert("When you press this button an XML file is read and pieces are positioned in  a classic chess endgame!")
+
 
 
 
@@ -387,16 +389,19 @@ function getXML() {
 	
 }
 function addPosition() {
-    var tester;
     var gridTable = document.getElementById("chessTable");
     var col = this.cellIndex;
     var row = this.parentNode.rowIndex;
     var cell = gridTable.rows[row].cells[col];
     var extraStuff = document.getElementsByTagName('td');
-	alert(extraStuff[(row * 8) + col].innerHTML) 
+	alert(extraStuff[(row * 8) + col].innerHTML)
+	if (valid == true){
+		tryMove(tester,col,row)
+    } 
     for (p in pieces) {
         if (row == pieces[p].row && col == pieces[p].column && pieces[p])
-        	if (pieceValid(p,col,row) == true){;
+        	if (pieceValid(p,col,row) == true){
+        		valid = true
  				cell.id += "Clicked";   
             	tester = pieces[p].piece;
            }
@@ -411,7 +416,11 @@ function addPosition() {
     else {
         selectedPiece.innerHTML = "";
     }
+
+    
 }
+
+
 function pieceValid(p,col,row){
 	str = pieces[p].piece
 	var valid = true;
@@ -429,8 +438,36 @@ function pieceValid(p,col,row){
 				}
 			}
 		
+	}
+		if (str.substring(0, str.length - 1) == 'WPawn'){
+		for (x in pieces) {
+		if (pieces[x].row == row + 1 && pieces[x].column == col){
+				valid = false
+				if (pieces[x].piece.charAt(0) == "W"){}
+					if (pieces[x].row == row + 1 && pieces[x].column - 1  == col){
+						return true
+					}
+					if (pieces[x].row == row + 1 && pieces[x].column + 1 == col){
+						return true
+					}
+				}
+		}
 		
 	}
 	return valid;
 	
+}
+function tryMove(tester,col,row){
+	
+
+	if (tester.substring(0, tester.length - 1) == 'BPawn'){
+	for (p in pieces){
+		if (pieces[p].piece == tester){
+			if (pieces[p].row == row + 1 && pieces[p].column == col){
+				alert('reith')
+				pieces[p].row = row
+			}
+		}
+	}
+	}
 }
