@@ -400,7 +400,7 @@ function addPosition() {
     var extraStuff = document.getElementsByTagName('td');
 	alert(extraStuff[(row * 8) + col].innerHTML)
     moveList = []
-        if (clickedRow == row && clickedCol == col){
+    if (clickedRow == row && clickedCol == col){
     	alert('already clicked')
     	cell.id = '';
     	resetClicked = true;
@@ -416,22 +416,24 @@ function addPosition() {
         		clickedCol = col;
  				cell.id = "Clicked";   
             	tester = pieces[p].piece;
-           }
-          }
+           	}
+         }
     }
 
     }
+    
+    if (moveList.length > 0 && (clickedRow != row && clickedCol != col)){
+		tryMove(tester,col,row)
+    }
     if (resetClicked == true){
     	clickedRow = null
+    	clickedCol = null
     	resetClicked = false
     }
     for (g in moveList){
     alert(moveList[g].row + ' ' + moveList[g].col)
 
-    }
-    	if (moveList.length > 0){
-		tryMove(tester,col,row)
-    }
+	}
 
     var head = document.getElementById("header");
     var chr = String.fromCharCode(64 + col);
