@@ -12,6 +12,7 @@ var listCol = []
 var moveList = []
 var clickedRow;
 var clickedCol;
+var clickedCell;
 var resetClicked = false;
 var whiteTaken = [];
 var blackTaken = [];
@@ -416,6 +417,7 @@ function addPosition() {
         		valid = true
         		clickedRow = row;
         		clickedCol = col;
+        		clickedCell = cell;
  				cell.id = "Clicked";   
             	tester = pieces[p].piece;
            }
@@ -427,7 +429,7 @@ function addPosition() {
     if (clickedRow != row || clickedCol != col){
     	for (x in moveList){
     		if (moveList[x].row == row && moveList[x].col == col){
-			tryMove(tester,col,row)
+			tryMove(tester,col,row,gridTable,cell)
 			moveList = [];
 			break;
 			}
@@ -437,6 +439,7 @@ function addPosition() {
     if (resetClicked == true){
     	clickedRow = null
     	clickedCol = null
+    	clickedCell = null
     	resetClicked = false
     }
     
@@ -511,7 +514,7 @@ function pieceValid(p,col,row){
 	return valid;
 	
 }
-function tryMove(tester,col,row){
+function tryMove(tester,col,row,gridTable,cell){
 	
 
 	if (tester.substring(0, tester.length - 1) == 'BPawn'){
@@ -524,10 +527,10 @@ function tryMove(tester,col,row){
 					if (pieces[y].row == clickedRow && pieces[y].column == clickedCol){
 						pieces[y].row = row;
 						pieces[y].column = col;
-						var countDiv = document.getElementById("chessboardDiv");
-						countDiv.innerHTML = writeboard();
+						cell.innerHTML = "<font color=\"white\">" + pieces[y].display + "</font>";
+						clickedCell.innerHTML = ''
+						clickedCell.id = ''
 						break;
-						
 					}
 				}
 			}
