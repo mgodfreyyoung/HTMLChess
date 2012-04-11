@@ -315,8 +315,8 @@ function resetPieces() {
 		piece : "BPawn8",
 		display : "<img id = 'BPawn8',  src='pieces/Black_Pawn.png', height=38 width=38>"
 	},{
-		row : 7,
-		column : 0,
+		row : 4,
+		column : 4,
 		piece : "BRookL",
 		display : "<img id = 'BrookL',  src='pieces/Black_Rook.png', height=38 width=38>"
 	}, {
@@ -542,6 +542,112 @@ function pieceValid(p,col,row){
 		}
 		
 	}
+	if (str.substring(0, str.length - 1) == 'BRook'){
+		var rowTemp = row + 1;
+		var colTemp = col
+		var stop = false;
+		alert(moveList.length)
+		
+		///check down....
+		for (rowTemp; rowTemp < 8; rowTemp++){
+			alert(rowTemp)
+			for (x in pieces){
+				
+				if (pieces[x].row == rowTemp && pieces[x].column == col){
+				if (pieces[x].piece.charAt(0) == "W"){
+					moveList.push({row: rowTemp, col: col})
+				}
+				stop = true;
+				break;
+				
+				}
+				if (stop == true)
+				break
+			}
+		if (stop == true){
+		break
+		}
+		moveList.push({row: rowTemp, col: col})
+		}
+		
+		//check up
+		rowTemp = row - 1;
+		colTemp = col
+		stop = false;	
+		for (rowTemp; rowTemp >= 0; rowTemp--){
+			alert(rowTemp)
+			for (x in pieces){
+				
+				if (pieces[x].row == rowTemp && pieces[x].column == col){
+				if (pieces[x].piece.charAt(0) == "W"){
+					moveList.push({row: rowTemp, col: col})
+				}
+				stop = true;
+				break;
+				
+				}
+				if (stop == true)
+				break
+			}
+		if (stop == true){
+		break
+		}
+		moveList.push({row: rowTemp, col: col})
+		}
+		
+		//check right...
+		rowTemp = row;
+		colTemp = col + 1
+		stop = false;	
+		for (colTemp; colTemp < 8; colTemp++){
+			alert(colTemp)
+			for (x in pieces){
+				
+				if (pieces[x].row == row && pieces[x].column == colTemp){
+				if (pieces[x].piece.charAt(0) == "W"){
+					moveList.push({row: row, col: colTemp})
+				}
+				stop = true;
+				break;
+				
+				}
+				if (stop == true)
+				break
+			}
+		if (stop == true){
+		break
+		}
+		moveList.push({row: row, col: colTemp})
+		}
+		
+		//check left...
+		rowTemp = row;
+		colTemp = col - 1
+		stop = false;	
+		for (colTemp; colTemp >= 0; colTemp--){
+			alert(colTemp)
+			for (x in pieces){
+				
+				if (pieces[x].row == row && pieces[x].column == colTemp){
+				if (pieces[x].piece.charAt(0) == "W"){
+					moveList.push({row: row, col: colTemp})
+				}
+				stop = true;
+				break;
+				
+				}
+				if (stop == true)
+				break
+			}
+		if (stop == true){
+		break
+		}
+		moveList.push({row: row, col: colTemp})
+		}
+			
+	}
+	
+	
 	return valid;
 	
 }
