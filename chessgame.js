@@ -20,7 +20,7 @@ var blackTaken = [];
 // the following block is the variables to change the positions of the pieces...I went with simple letters to insure browser compatiablity...
 // create object literal array for chesspiece......the following row and column values can be modified to move the pieces.....
 var pieces = [];
-
+resetPieces();
 
 function showChessboard() {
     getCookie();
@@ -390,7 +390,7 @@ function getXML() {
 		display : "<" + listDisplay[r] + ">"
 	})
 	}
-	resetPieces();
+
 	var countDiv = document.getElementById("chessboardDiv");
 	countDiv.innerHTML = writeboard();
 	
@@ -410,6 +410,7 @@ function addPosition() {
 
     }
     if (clickedRow == null){
+    	alert ('outerloop')
     for (p in pieces) {
         if (row == pieces[p].row && col == pieces[p].column && pieces[p]){
         	pieceValid(p,col,row);
@@ -465,6 +466,7 @@ function addPosition() {
 
 
 function pieceValid(p,col,row){
+	alert('intloop')
 	str = pieces[p].piece
 	var valid = true;
 	if (str.substring(0, str.length - 1) == 'BPawn'){
@@ -521,19 +523,31 @@ function tryMove(tester,col,row,gridTable,cell){
 		for (x in pieces){
 			if (pieces[x].row == row && pieces[x].column == col){
 				whiteTaken.push({row: row, col: col, piece: pieces[x].piece});
-				alert(whiteTaken[0].piece)
-				pieces.splice(x,1);
 				for (y in pieces){
-					if (pieces[y].row == clickedRow && pieces[y].column == clickedCol){
+					if(pieces[y].row == clickedRow && pieces[y].column == clickedCol) {
 						pieces[y].row = row;
 						pieces[y].column = col;
 						cell.innerHTML = "<font color=\"white\">" + pieces[y].display + "</font>";
 						clickedCell.innerHTML = ''
 						clickedCell.id = ''
+						resetClicked = true;
+						pieces.splice(x,1);
 						break;
 					}
+
 				}
 			}
+			}
+		for (y in pieces){
+			if (pieces[y].row == clickedRow && pieces[y].column == clickedCol){
+				pieces[y].row = row;
+				pieces[y].column = col;
+				cell.innerHTML = "<font color=\"white\">" + pieces[y].display + "</font>";
+				clickedCell.innerHTML = ''
+				clickedCell.id = ''
+				resetClicked = true;
+				break;
+			}
+			}	
 		}
-	}
 }
