@@ -16,6 +16,7 @@ var clickedCell;
 var resetClicked = false;
 var whiteTaken = [];
 var blackTaken = [];
+var whosTurn = 'B';
 
 // the following block is the variables to change the positions of the pieces...I went with simple letters to insure browser compatiablity...
 // create object literal array for chesspiece......the following row and column values can be modified to move the pieces.....
@@ -410,9 +411,8 @@ function addPosition() {
 
     }
     if (clickedRow == null){
-    	alert ('outerloop')
     for (p in pieces) {
-        if (row == pieces[p].row && col == pieces[p].column && pieces[p]){
+       if (row == pieces[p].row && col == pieces[p].column && pieces[p] && pieces[p].piece.charAt(0) == whosTurn){
         	pieceValid(p,col,row);
         	if (moveList.length != 0){
         		valid = true
@@ -432,6 +432,13 @@ function addPosition() {
     		if (moveList[x].row == row && moveList[x].col == col){
 			tryMove(tester,col,row,gridTable,cell)
 			moveList = [];
+			if (whosTurn == 'W'){
+				whosTurn = 'B'
+			}
+			else{
+				whosTurn = 'W'
+			}
+			
 			break;
 			}
     	}
@@ -523,6 +530,37 @@ function tryMove(tester,col,row,gridTable,cell){
 		for (x in pieces){
 			if (pieces[x].row == row && pieces[x].column == col){
 				whiteTaken.push({row: row, col: col, piece: pieces[x].piece});
+				for (y in pieces){
+					if(pieces[y].row == clickedRow && pieces[y].column == clickedCol) {
+						pieces[y].row = row;
+						pieces[y].column = col;
+						cell.innerHTML = "<font color=\"white\">" + pieces[y].display + "</font>";
+						clickedCell.innerHTML = ''
+						clickedCell.id = ''
+						resetClicked = true;
+						pieces.splice(x,1);
+						break;
+					}
+
+				}
+			}
+			}
+		for (y in pieces){
+			if (pieces[y].row == clickedRow && pieces[y].column == clickedCol){
+				pieces[y].row = row;
+				pieces[y].column = col;
+				cell.innerHTML = "<font color=\"white\">" + pieces[y].display + "</font>";
+				clickedCell.innerHTML = ''
+				clickedCell.id = ''
+				resetClicked = true;
+				break;
+			}
+			}	
+		}
+		if (tester.substring(0, tester.length - 1) == 'WPawn'){
+		for (x in pieces){
+			if (pieces[x].row == row && pieces[x].column == col){
+				blackTaken.push({row: row, col: col, piece: pieces[x].piece});
 				for (y in pieces){
 					if(pieces[y].row == clickedRow && pieces[y].column == clickedCol) {
 						pieces[y].row = row;
