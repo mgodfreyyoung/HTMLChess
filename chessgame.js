@@ -4,20 +4,22 @@ var firstPlayer;
 var secondPlayer;
 var pieceToMove;
 var flag1, flag2, flag3, flag4, flag5, flag6, flag7;
-    var valid = false;
-    var tester;
-    var listName = []
-    var listRow = []
-    var listCol = []
-    var moveList = []
-    var clickedRow;
-    var clickedCol;
-    var resetClicked = false;
+var valid = false;
+var tester;
+var listName = []
+var listRow = []
+var listCol = []
+var moveList = []
+var clickedRow;
+var clickedCol;
+var resetClicked = false;
+var whiteTaken = [];
+var blackTaken = [];
 
 // the following block is the variables to change the positions of the pieces...I went with simple letters to insure browser compatiablity...
 // create object literal array for chesspiece......the following row and column values can be modified to move the pieces.....
 var pieces = [];
-resetPieces();
+
 
 function showChessboard() {
     getCookie();
@@ -387,7 +389,7 @@ function getXML() {
 		display : "<" + listDisplay[r] + ">"
 	})
 	}
-
+	resetPieces();
 	var countDiv = document.getElementById("chessboardDiv");
 	countDiv.innerHTML = writeboard();
 	
@@ -513,13 +515,22 @@ function tryMove(tester,col,row){
 	
 
 	if (tester.substring(0, tester.length - 1) == 'BPawn'){
-	for (p in pieces){
-		if (pieces[p].piece == tester){
-			if (pieces[p].row == row + 1 && pieces[p].column == col){
-				alert('reith')
-				pieces[p].row = row
+		for (x in pieces){
+			if (pieces[x].row == row && pieces[x].column == col){
+				whiteTaken.push({row: row, col: col, piece: pieces[x].piece});
+				alert(whiteTaken[0].piece)
+				pieces.splice(x,1);
+				for (y in pieces){
+					if (pieces[y].row == clickedRow && pieces[y].column == clickedCol){
+						pieces[y].row = row;
+						pieces[y].column = col;
+						var countDiv = document.getElementById("chessboardDiv");
+						countDiv.innerHTML = writeboard();
+						break;
+						
+					}
+				}
 			}
 		}
-	}
 	}
 }
