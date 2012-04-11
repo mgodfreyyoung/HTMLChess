@@ -469,28 +469,28 @@ function pieceValid(p,col,row){
 	/// for Black Pawn...
 	str = pieces[p].piece
 	var valid = true;
-	if (str.substring(0, str.length - 1) == 'BPawn'){
-		moveList.push({row: row - 1, col:col})
-		if (row == 6){
-			moveList.push({row: row - 2, col: col})
-		}
+	if (str.substring(0, str.length - 1) == 'BPawn' && row == 6){
+		moveList.push({row: row - 1, col: col})
+		moveList.push({row: row - 2, col: col})
 		for (x in pieces) {
 			if (pieces[x].row == row - 1 && pieces[x].column == col){
 				for (y in moveList){
 				if (moveList[y].row == row - 1 && moveList[y].col == col){
 					moveList.splice(y,1)
+				}
 				if (moveList[y].row == row - 2 && moveList[y].col == col){
 					moveList.splice(y,1)
 				}
 				}
-				}
+			}
+				
 			if (pieces[x].row == row - 2 && pieces[x].column == col){
 				for (y in moveList){
 				if (moveList[y].row == row - 2 && moveList[y].col == col){
 					moveList.splice(y,1)
 				}
 				}
-				}
+				
 			
 			}
 			if (pieces[x].piece.charAt(0) == "W"){
@@ -506,16 +506,15 @@ function pieceValid(p,col,row){
 		
 	}
 		///For White pawn...
-	if (str.substring(0, str.length - 1) == 'WPawn'){
-		moveList.push({row: row + 1, col:col})
-		if (row == 1){
-			moveList.push({row: row + 2, col: col})
-		}
+	if (str.substring(0, str.length - 1) == 'WPawn' && row == 1){
+		moveList.push({row: row + 1, col: col})
+		moveList.push({row: row + 2, col: col})
 		for (x in pieces) {
 			if (pieces[x].row == row + 1 && pieces[x].column == col){
 				for (y in moveList){
 				if (moveList[y].row == row + 1 && moveList[y].col == col){
 					moveList.splice(y,1)
+				}
 				if (moveList[y].row == row + 2 && moveList[y].col == col){
 					moveList.splice(y,1)
 				}
@@ -527,7 +526,62 @@ function pieceValid(p,col,row){
 					moveList.splice(y,1)
 				}
 				}
+				
+			
+			}
+			if (pieces[x].piece.charAt(0) == "B"){
+				if (pieces[x].row == row + 1 && pieces[x].column  == col - 1){
+						moveList.push({row: row + 1, col: col - 1})
+					}
+					if (pieces[x].row == row + 1 && pieces[x].column == col + 1){
+						moveList.push({row: row + 1, col: col + 1})
+					}
+				
+			}
+		}
+		
+	}
+		/// for Black Pawn...
+	str = pieces[p].piece
+	var valid = true;
+	if (str.substring(0, str.length - 1) == 'BPawn' && row != 6){
+		if (row > 0 && row < 7){
+		moveList.push({row: row - 1, col: col})
+		}
+		for (x in pieces) {
+			if (pieces[x].row == row - 1 && pieces[x].column == col){
+				for (y in moveList){
+				if (moveList[y].row == row - 1 && moveList[y].col == col){
+					moveList.splice(y,1)
 				}
+				}				
+				
+			}
+			if (pieces[x].piece.charAt(0) == "W"){
+				if (pieces[x].row == row - 1 && pieces[x].column  == col - 1){
+						moveList.push({row: row - 1, col: col - 1})
+					}
+					if (pieces[x].row == row - 1 && pieces[x].column == col + 1){
+						moveList.push({row: row - 1, col: col + 1})
+					}
+				
+			}
+		}
+		
+	}
+		///For White pawn...
+	if (str.substring(0, str.length - 1) == 'WPawn' && row != 1){
+		if (row > 0  && row < 7){
+		moveList.push({row: row + 1, col: col})
+		}
+		for (x in pieces) {
+			if (pieces[x].row == row + 1 && pieces[x].column == col){
+				for (y in moveList){
+				if (moveList[y].row == row + 1 && moveList[y].col == col){
+					moveList.splice(y,1)
+				}
+				}				
+				
 			
 			}
 			if (pieces[x].piece.charAt(0) == "B"){
@@ -543,7 +597,7 @@ function pieceValid(p,col,row){
 		
 	}
 	/// Rooks Pattern
-	if (str.substring(0, str.length - 1) == 'BRook' || str.substring(0, str.length - 1) == 'WRook'){
+	if (str.substring(0, str.length - 1) == 'BRook' || str.substring(0, str.length - 1) == 'WRook' || str == 'BQueen' || str == 'WQueen'){
 		var rowTemp = row + 1;
 		var colTemp = col
 		var stop = false;
@@ -643,8 +697,238 @@ function pieceValid(p,col,row){
 			
 	}
 	
+	/// Bishops....
+		if (str.substring(0, str.length - 1) == 'BBishop' || str.substring(0, str.length - 1) == 'WBishop' || str == 'BQueen' || str == 'WQueen'){
+		var rowTemp = row + 1;
+		var colTemp = col
+		var stop = false;
+		
+		///check left-down....
+		for (rowTemp; rowTemp < 8; rowTemp++){
+			colTemp = colTemp - 1
+			if (colTemp < 0){
+			break;
+			}
+				for (x in pieces){
+				
+				if (pieces[x].row == rowTemp && pieces[x].column == colTemp){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
+					moveList.push({row: rowTemp, col: colTemp})
+				}
+				stop = true;
+				break;
+				
+				}
+				if (stop == true)
+				break
+			}
+		if (stop == true){
+		break
+		}
+		moveList.push({row: rowTemp, col: colTemp})
+		}
+			
+		
+		rowTemp = row + 1;
+		colTemp = col
+		stop = false;
+		///check right-down....
+		for (rowTemp; rowTemp < 8; rowTemp++){
+			colTemp = colTemp + 1
+			if (colTemp > 7){
+			break;
+			}
+				for (x in pieces){
+				
+				if (pieces[x].row == rowTemp && pieces[x].column == colTemp){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
+					moveList.push({row: rowTemp, col: colTemp})
+				}
+				stop = true;
+				break;
+				
+				}
+				if (stop == true)
+				break
+			}
+		if (stop == true){
+		break
+		}
+		moveList.push({row: rowTemp, col: colTemp})
+		}
+		
+		
+		///check right-up..		
+		rowTemp = row - 1;
+		colTemp = col
+		stop = false;
+		for (rowTemp; rowTemp >= 0; rowTemp--){
+			colTemp = colTemp + 1
+			if (colTemp > 7){
+			break;
+			}
+				for (x in pieces){
+				
+				if (pieces[x].row == rowTemp && pieces[x].column == colTemp){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
+					moveList.push({row: rowTemp, col: colTemp})
+				}
+				stop = true;
+				break;
+				
+				}
+				if (stop == true)
+				break
+			}
+		if (stop == true){
+		break
+		}
+		moveList.push({row: rowTemp, col: colTemp})
+		}
+		
+		///check left-up..		
+		rowTemp = row - 1;
+		colTemp = col
+		stop = false;
+		for (rowTemp; rowTemp >= 0; rowTemp--){
+			colTemp = colTemp - 1
+			if (colTemp < 0){
+			break;
+			}
+				for (x in pieces){
+				
+				if (pieces[x].row == rowTemp && pieces[x].column == colTemp){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
+					moveList.push({row: rowTemp, col: colTemp})
+				}
+				stop = true;
+				break;
+				
+				}
+				if (stop == true)
+				break
+			}
+		if (stop == true){
+		break
+		}
+		moveList.push({row: rowTemp, col: colTemp})
+		}
+			
+	}
 	
+	
+	//Knights...
+	if (str.substring(0, str.length - 1) == 'BKnight' || str.substring(0, str.length - 1) == 'WKnight'){
+		var flag = false	
+		for (x in pieces){
+			if (pieces[x].row == row + 1 && pieces[x].column == col + 2 ){
+				flag = true
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
+					moveList.push({row: row + 1, col: col + 2})
+				}
+			}
+
+			}
+		if (flag == false && row + 1 >= 0 && row + 1 < 8 && col + 2 >=0 && col + 2 < 8){
+			moveList.push({row: row + 1, col: col + 2})
+		}
+		flag = false
+		for (x in pieces){
+			if (pieces[x].row == row + 1 && pieces[x].column == col - 2 ){
+				flag = true
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
+					moveList.push({row: row + 1, col: col - 2})
+				}
+			}
+
+			}
+		if (flag == false && row + 1 >= 0 && row + 1 < 8 && col -2 >=0 && col -2 < 8){
+			moveList.push({row: row + 1, col: col - 2})
+		}
+		flag = false
+		for (x in pieces){
+
+			if (pieces[x].row == row + 2 && pieces[x].column == col - 1 ){
+				flag = true
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
+					moveList.push({row: row + 2, col: col - 1})
+				}
+			}
+
+			}
+		if (flag == false && row + 2 >= 0 && row + 2 < 8 && col - 1 >=0 && col - 1 < 8){
+			moveList.push({row: row + 2, col: col - 1})			
+		}
+		flag = false
+		for (x in pieces){
+
+			if (pieces[x].row == row + 2 && pieces[x].column == col + 1 ){
+				flag = true
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
+					moveList.push({row: row + 2, col: col + 1})
+				}
+			}
+			}
+		if (flag == false && row + 2 >= 0 && row + 2 < 8 && col + 1 >=0 && col + 1 < 8){
+			moveList.push({row: row + 2, col: col + 1})
+		}
+		flag = false
+		for (x in pieces){
+			if (pieces[x].row == row - 1 && pieces[x].column == col + 2 ){
+				flag = true
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
+					moveList.push({row: row - 1, col: col + 2})
+					break
+				}
+			}
+			}
+		if (flag == false && row - 1 >= 0 && row - 1 < 8 && col + 2 >=0 && col + 2 < 8){
+			moveList.push({row: row - 1, col: col + 2})
+		}
+		flag = false
+		for (x in pieces){
+
+			if (pieces[x].row == row - 1 && pieces[x].column == col - 2 ){
+				flag = true
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
+					moveList.push({row: row - 1, col: col - 2})
+				}
+			}
+			}
+		if (flag == false && row - 1 >= 0 && row - 1 < 8 && col -2 >=0 && col -2 < 8){
+			moveList.push({row: row - 1, col: col - 2})
+		}
+		flag = false
+		for (x in pieces){
+
+			if (pieces[x].row == row - 2 && pieces[x].column == col - 1 ){
+				flag = true
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
+					moveList.push({row: row - 2, col: col - 1})
+				}
+			}
+			}
+		if (flag == false && row +-2 >= 0 && row - 2 < 8 && col - 1 >=0 && col - 1 < 8){
+			moveList.push({row: row - 2, col: col - 1})
+		}
+		flag = false
+		for (x in pieces){
+
+			if (pieces[x].row == row - 2 && pieces[x].column == col + 1 ){
+				flag = true
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
+					moveList.push({row: row - 2, col: col + 1})
+				}
+			}
+			}
+			if (flag == false && row - 2 >= 0 && row - 2 < 8 && col + 1 >=0 && col + 1 < 8){
+				moveList.push({row: row - 2, col: col + 1})
+		}
+	}
+	
+
 	return valid;
+
 	
 }
 function tryMove(tester,col,row,gridTable,cell){
@@ -690,3 +974,5 @@ function tryMove(tester,col,row,gridTable,cell){
 		
 
 }
+
+ 
