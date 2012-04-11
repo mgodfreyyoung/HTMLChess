@@ -542,19 +542,18 @@ function pieceValid(p,col,row){
 		}
 		
 	}
-	if (str.substring(0, str.length - 1) == 'BRook'){
+	/// Rooks Pattern
+	if (str.substring(0, str.length - 1) == 'BRook' || str.substring(0, str.length - 1) == 'WRook'){
 		var rowTemp = row + 1;
 		var colTemp = col
 		var stop = false;
-		alert(moveList.length)
 		
 		///check down....
 		for (rowTemp; rowTemp < 8; rowTemp++){
-			alert(rowTemp)
 			for (x in pieces){
 				
 				if (pieces[x].row == rowTemp && pieces[x].column == col){
-				if (pieces[x].piece.charAt(0) == "W"){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
 					moveList.push({row: rowTemp, col: col})
 				}
 				stop = true;
@@ -575,11 +574,10 @@ function pieceValid(p,col,row){
 		colTemp = col
 		stop = false;	
 		for (rowTemp; rowTemp >= 0; rowTemp--){
-			alert(rowTemp)
 			for (x in pieces){
 				
 				if (pieces[x].row == rowTemp && pieces[x].column == col){
-				if (pieces[x].piece.charAt(0) == "W"){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
 					moveList.push({row: rowTemp, col: col})
 				}
 				stop = true;
@@ -600,11 +598,10 @@ function pieceValid(p,col,row){
 		colTemp = col + 1
 		stop = false;	
 		for (colTemp; colTemp < 8; colTemp++){
-			alert(colTemp)
 			for (x in pieces){
 				
 				if (pieces[x].row == row && pieces[x].column == colTemp){
-				if (pieces[x].piece.charAt(0) == "W"){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
 					moveList.push({row: row, col: colTemp})
 				}
 				stop = true;
@@ -625,11 +622,10 @@ function pieceValid(p,col,row){
 		colTemp = col - 1
 		stop = false;	
 		for (colTemp; colTemp >= 0; colTemp--){
-			alert(colTemp)
 			for (x in pieces){
 				
 				if (pieces[x].row == row && pieces[x].column == colTemp){
-				if (pieces[x].piece.charAt(0) == "W"){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "B") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "W")){
 					moveList.push({row: row, col: colTemp})
 				}
 				stop = true;
@@ -654,41 +650,15 @@ function pieceValid(p,col,row){
 function tryMove(tester,col,row,gridTable,cell){
 	
 
-	if (tester.substring(0, tester.length - 1) == 'BPawn'){
+
 		for (x in pieces){
 			if (pieces[x].row == row && pieces[x].column == col){
+				if (whosTurn == 'B'){
 				whiteTaken.push({row: row, col: col, piece: pieces[x].piece});
-				for (y in pieces){
-					if(pieces[y].row == clickedRow && pieces[y].column == clickedCol) {
-						pieces[y].row = row;
-						pieces[y].column = col;
-						cell.innerHTML = "<font color=\"white\">" + pieces[y].display + "</font>";
-						clickedCell.innerHTML = ''
-						clickedCell.id = ''
-						resetClicked = true;
-						pieces.splice(x,1);
-						break;
-					}
-
 				}
-			}
-			}
-		for (y in pieces){
-			if (pieces[y].row == clickedRow && pieces[y].column == clickedCol){
-				pieces[y].row = row;
-				pieces[y].column = col;
-				cell.innerHTML = "<font color=\"white\">" + pieces[y].display + "</font>";
-				clickedCell.innerHTML = ''
-				clickedCell.id = ''
-				resetClicked = true;
-				break;
-			}
-			}	
-		}
-		if (tester.substring(0, tester.length - 1) == 'WPawn'){
-		for (x in pieces){
-			if (pieces[x].row == row && pieces[x].column == col){
+				if (whosTurn == 'W'){
 				blackTaken.push({row: row, col: col, piece: pieces[x].piece});
+				}
 				for (y in pieces){
 					if(pieces[y].row == clickedRow && pieces[y].column == clickedCol) {
 						pieces[y].row = row;
@@ -715,5 +685,8 @@ function tryMove(tester,col,row,gridTable,cell){
 				break;
 			}
 			}	
-		}
+		
+
+		
+
 }
