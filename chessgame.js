@@ -3,7 +3,6 @@ var chessTwoDown;
 var firstPlayer;
 var secondPlayer;
 var pieceToMove;
-var flag1, flag2, flag3, flag4, flag5, flag6, flag7;
 var valid = false;
 var tester;
 var listName = []
@@ -378,10 +377,6 @@ function getXML() {
 	listCol.push(xcolumn.firstChild.data);
 	listDisplay.push(xdisplay.firstChild.data);
 	}
-
-
-
-
 	pieces = [];
     for (var r = 0; r < listName.length; r++){
 	pieces.push({
@@ -401,8 +396,11 @@ function addPosition() {
     var col = this.cellIndex;
     var row = this.parentNode.rowIndex;
     var cell = gridTable.rows[row].cells[col];
-    var extraStuff = document.getElementsByTagName('td');
-	alert(extraStuff[(row * 8) + col].innerHTML)
+
+
+    ///var extraStuff = document.getElementsByTagName('td');
+	///alert(extraStuff[(row * 8) + col].innerHTML)
+
 
     if (clickedRow == row && clickedCol == col){
     	cell.id = '';
@@ -450,12 +448,6 @@ function addPosition() {
     	clickedCell = null
     	resetClicked = false
     }
-    
-    for (g in moveList){
-    alert(moveList[g].row + ' ' + moveList[g].col)
-
-	}
-
     var head = document.getElementById("header");
     var chr = String.fromCharCode(64 + col);
     head.innerHTML = "Col: " + chr + " Row: " + row;
@@ -473,18 +465,33 @@ function addPosition() {
 
 
 function pieceValid(p,col,row){
-	alert('intloop')
+	
+	/// for Black Pawn...
 	str = pieces[p].piece
 	var valid = true;
 	if (str.substring(0, str.length - 1) == 'BPawn'){
-		moveList.push({row: row - 1, col: col})
+		moveList.push({row: row - 1, col:col})
+		if (row == 6){
+			moveList.push({row: row - 2, col: col})
+		}
 		for (x in pieces) {
 			if (pieces[x].row == row - 1 && pieces[x].column == col){
 				for (y in moveList){
 				if (moveList[y].row == row - 1 && moveList[y].col == col){
 					moveList.splice(y,1)
+				if (moveList[y].row == row - 2 && moveList[y].col == col){
+					moveList.splice(y,1)
 				}
 				}
+				}
+			if (pieces[x].row == row - 2 && pieces[x].column == col){
+				for (y in moveList){
+				if (moveList[y].row == row - 2 && moveList[y].col == col){
+					moveList.splice(y,1)
+				}
+				}
+				}
+			
 			}
 			if (pieces[x].piece.charAt(0) == "W"){
 				if (pieces[x].row == row - 1 && pieces[x].column  == col - 1){
@@ -498,22 +505,37 @@ function pieceValid(p,col,row){
 		}
 		
 	}
-		if (str.substring(0, str.length - 1) == 'WPawn'){
-		moveList.push({row: row + 1, col: col})
+		///For White pawn...
+	if (str.substring(0, str.length - 1) == 'WPawn'){
+		moveList.push({row: row + 1, col:col})
+		if (row == 1){
+			moveList.push({row: row + 2, col: col})
+		}
 		for (x in pieces) {
 			if (pieces[x].row == row + 1 && pieces[x].column == col){
 				for (y in moveList){
 				if (moveList[y].row == row + 1 && moveList[y].col == col){
 					moveList.splice(y,1)
+				if (moveList[y].row == row + 2 && moveList[y].col == col){
+					moveList.splice(y,1)
 				}
 				}
+				}
+			if (pieces[x].row == row + 2 && pieces[x].column == col){
+				for (y in moveList){
+				if (moveList[y].row == row + 2 && moveList[y].col == col){
+					moveList.splice(y,1)
+				}
+				}
+				}
+			
 			}
 			if (pieces[x].piece.charAt(0) == "B"){
 				if (pieces[x].row == row + 1 && pieces[x].column  == col - 1){
-						moveList.push({row: row - 1, col: col - 1})
+						moveList.push({row: row + 1, col: col - 1})
 					}
 					if (pieces[x].row == row + 1 && pieces[x].column == col + 1){
-						moveList.push({row: row - 1, col: col + 1})
+						moveList.push({row: row + 1, col: col + 1})
 					}
 				
 			}
