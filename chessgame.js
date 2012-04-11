@@ -399,11 +399,11 @@ function addPosition() {
     var cell = gridTable.rows[row].cells[col];
     var extraStuff = document.getElementsByTagName('td');
 	alert(extraStuff[(row * 8) + col].innerHTML)
-    moveList = []
+
     if (clickedRow == row && clickedCol == col){
-    	alert('already clicked')
     	cell.id = '';
     	resetClicked = true;
+    	moveList = []
 
     }
     if (clickedRow == null){
@@ -416,20 +416,28 @@ function addPosition() {
         		clickedCol = col;
  				cell.id = "Clicked";   
             	tester = pieces[p].piece;
+           }
            	}
          }
     }
 
-    }
     
-    if (moveList.length > 0 && (clickedRow != row && clickedCol != col)){
-		tryMove(tester,col,row)
+    if (clickedRow != row || clickedCol != col){
+    	for (x in moveList){
+    		if (moveList[x].row == row && moveList[x].col == col){
+			tryMove(tester,col,row)
+			moveList = [];
+			break;
+			}
+    	}
+
     }
     if (resetClicked == true){
     	clickedRow = null
     	clickedCol = null
     	resetClicked = false
     }
+    
     for (g in moveList){
     alert(moveList[g].row + ' ' + moveList[g].col)
 
@@ -503,7 +511,7 @@ function pieceValid(p,col,row){
 }
 function tryMove(tester,col,row){
 	
-	alert('test')
+
 	if (tester.substring(0, tester.length - 1) == 'BPawn'){
 	for (p in pieces){
 		if (pieces[p].piece == tester){
