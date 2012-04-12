@@ -926,15 +926,103 @@ function pieceValid(p,col,row){
 		}
 	}
 	
-
+	///  Kings
+	if (str =='BKing' || str == 'WKing'){
+		if (row < 7)
+		moveList.push({row: row + 1, col: col})
+		if (row > 0)
+		moveList.push({row: row - 1, col: col})	
+		if (col < 7)	
+		moveList.push({row: row, col: col + 1})
+		if (col > 0)
+		moveList.push({row: row, col: col - 1})
+		if (row < 7 && col < 7)
+		moveList.push({row: row + 1, col: col + 1})
+		if (row < 7 && col > 0)
+		moveList.push({row: row + 1, col: col - 1})
+		if (row > 0 && col < 7)
+		moveList.push({row: row - 1, col: col + 1})
+		if (row > 0 && col > 0)
+		moveList.push({row: row - 1, col: col - 1})
+		for (x in pieces){
+			if (pieces[x].row == row + 1 && pieces[x].column == col){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "W") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "B")){
+					for (y in moveList){
+					if (moveList[y].row == row + 1 && moveList[y].col == col){
+						moveList.splice(y,1)
+					}
+					}
+				}
+			}
+			if (pieces[x].row == row - 1 && pieces[x].column == col){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "W") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "B")){
+					for (y in moveList){					
+					if (moveList[y].row == row - 1 && moveList[y].col == col){
+						moveList.splice(y,1)
+					}
+				}
+				}
+			}
+			if (pieces[x].row == row && pieces[x].column == col + 1){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "W") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "B")){
+					for (y in moveList){			
+					if (moveList[y].row == row && moveList[y].col == col + 1){
+						moveList.splice(y,1)
+					}
+				}
+			}
+				}
+			if (pieces[x].row == row && pieces[x].column == col - 1){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "W") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "B")){
+					for (y in moveList){			
+					if (moveList[y].row == row && moveList[y].col == col - 1){
+						moveList.splice(y,1)
+					}
+				}
+			}
+				}
+			if (pieces[x].row == row + 1 && pieces[x].column == col + 1){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "W") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "B")){
+					for (y in moveList){
+					if (moveList[y].row == row + 1 && moveList[y].col == col + 1){
+						moveList.splice(y,1)
+					}
+				}
+			}
+				}
+			if (pieces[x].row == row + 1 && pieces[x].column == col - 1){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "W") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "B")){
+					for (y in moveList){			
+					if (moveList[y].row == row + 1  && moveList[y].col == col - 1){
+					
+						moveList.splice(y,1)
+					}
+				}
+			}
+				}
+			if (pieces[x].row == row - 1 && pieces[x].column == col + 1){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "W") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "B")){
+					for (y in moveList){
+					if (moveList[y].row == row - 1 && moveList[y].col == col + 1){
+						moveList.splice(y,1)
+					}
+				}
+				}
+			}
+			if (pieces[x].row == row - 1 && pieces[x].column == col - 1){
+				if ((pieces[x].piece.charAt(0) == "W" && whosTurn == "W") || (pieces[x].piece.charAt(0) == "B" && whosTurn == "B")){
+					for (y in moveList){
+					if (moveList[y].row == row - 1 && moveList[y].col == col - 1){
+						moveList.splice(y,1)
+					}
+				}
+				}
+			}
+	}
+	}
 	return valid;
-
-	
 }
 function tryMove(tester,col,row,gridTable,cell){
-	
-
-
 		for (x in pieces){
 			if (pieces[x].row == row && pieces[x].column == col){
 				if (whosTurn == 'B'){
@@ -954,7 +1042,6 @@ function tryMove(tester,col,row,gridTable,cell){
 						pieces.splice(x,1);
 						break;
 					}
-
 				}
 			}
 			}
@@ -969,10 +1056,6 @@ function tryMove(tester,col,row,gridTable,cell){
 				break;
 			}
 			}	
-		
-
-		
-
 }
 
  
