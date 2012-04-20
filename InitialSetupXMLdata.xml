@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<!--Same structure as example on page 510 of JavaScript: The Definitive Guide (5th ed.), by David Flanagan.
+Note that embedded white space can cause problems when using the XML
+document with DOM functions.-->
+<contacts>
+  <contact name="WRookL">
+    <row>0</row>
+    <column>0</column>
+    <display>img id = 'WRookL',  src='pieces/White_Rook.png', height='38' width='38'</display>
+  </contact>
+  <contact name="WKnightL">
+    <row>0</row>
+    <column>1</column>
+    <display>img id = 'WKnightL',  src='pieces/White_Knight.png', height=38 width=38</display>
+  </contact>
+  <contact name="WBishopL">
+    <row>0</row>
+    <column>2</column>
+    <display>img id = 'WBishopL',  src='pieces/White_Bishop.png', height=38 width=38</display>
+  </contact>
+  <contact name="WQueen">
+    <row>0</row>
+    <column>3</column>
+    <display>img id = 'WQuuen',  src='pieces/White_Queen.png', height=38 width=38</display>
+  </contact>
+  <contact name="WKing">
+    <row>0</row>
+    <column>4</column>
+    <display>img id = 'WKing',  src='pieces/White_King.png', height=38 width=38</display>
+  </contact>
+  <contact name="WBishopR">
+    <row>0</row>
+    <column>5</column>
+    <display>img id = 'WBishopR',  src='pieces/White_Bishop.png', height=38 width=38</display>
+  </contact>
+  <contact name="WKnightR">
+    <row>0</row>
+    <column>6</column>
+    <display>img id = 'WknightR',  src='pieces/White_Knight.png', height=38 width=38</display>
+  </contact>
+  <contact name="WRookR">
+    <row>0</row>
+    <column>7</column>
+    <display>img id = 'WRookR',  src='pieces/White_Rook.png', height=38 width=38</display>
+  </contact>
+  <contact name="WPawn1">
+    <row>1</row>
+    <column>0</column>
+    <display>img id = 'WPawn1', src='pieces/White_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="WPawn2">
+    <row>1</row>
+    <column>1</column>
+    <display>img id = 'WPawn2', src='pieces/White_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="WPawn3">
+    <row>1</row>
+    <column>2</column>
+    <display>img id = 'WPawn3', src='pieces/White_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="WPawn4">
+    <row>1</row>
+    <column>3</column>
+    <display>img id = 'WPawn4', src='pieces/White_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="WPawn5">
+    <row>1</row>
+    <column>4</column>
+    <display>img id = 'WPawn5', src='pieces/White_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="WPawn6">
+    <row>1</row>
+    <column>5</column>
+    <display>img id = 'WPawn6', src='pieces/White_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="WPawn7">
+    <row>1</row>
+    <column>6</column>
+    <display>img id = 'WPawn7', src='pieces/White_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="WPawn8">
+    <row>1</row>
+    <column>7</column>
+    <display>img id = 'WPawn8', src='pieces/White_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="BPawn1">
+    <row>6</row>
+    <column>0</column>
+    <display>img id = 'BPawn1', src='pieces/Black_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="BPawn2">
+    <row>6</row>
+    <column>1</column>
+    <display>img id = 'BPawn2', src='pieces/Black_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="BPawn3">
+    <row>6</row>
+    <column>2</column>
+    <display>img id = 'BPawn3', src='pieces/Black_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="BPawn4">
+    <row>6</row>
+    <column>3</column>
+    <display>img id = 'BPawn4', src='pieces/Black_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="BPawn5">
+    <row>6</row>
+    <column>4</column>
+    <display>img id = 'BPawn5', src='pieces/Black_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="BPawn6">
+    <row>6</row>
+    <column>5</column>
+    <display>img id = 'BPawn6', src='pieces/Black_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="BPawn7">
+    <row>6</row>
+    <column>6</column>
+    <display>img id = 'BPawn7', src='pieces/Black_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="BPawn8">
+    <row>6</row>
+    <column>7</column>
+    <display>img id = 'BPawn8', src='pieces/Black_Pawn.png', height=38 width=38</display>
+  </contact>
+  <contact name="BRookL">
+    <row>7</row>
+    <column>0</column>
+    <display>img id = 'BRookL',  src='pieces/Black_Rook.png', height=38 width=38</display>
+  </contact>
+  <contact name="BKnightL">
+    <row>7</row>
+    <column>1</column>
+    <display>img id = 'BKnightL',  src='pieces/Black_Knight.png', height=38 width=38</display>
+  </contact>
+  <contact name="BBishopL">
+    <row>7</row>
+    <column>2</column>
+    <display>img id = 'BBishopL',  src='pieces/Black_Bishop.png', height=38 width=38</display>
+  </contact>
+  <contact name="BQueen">
+    <row>7</row>
+    <column>3</column>
+    <display>img id = 'BQueen',  src='pieces/Black_Queen.png', height=38 width=38</display>
+  </contact>
+  <contact name="BKing">
+    <row>7</row>
+    <column>4</column>
+    <display>img id = 'BKing',  src='pieces/Black_King.png', height=38 width=38</display>
+  </contact>
+  <contact name="BBishopR">
+    <row>7</row>
+    <column>5</column>
+    <display>img id = 'BBishopR',  src='pieces/Black_Bishop.png', height=38 width=38</display>
+  </contact>
+  <contact name="BKnightR">
+    <row>7</row>
+    <column>6</column>
+    <display>img id = 'BKnightR',  src='pieces/Black_Knight.png', height=38 width=38</display>
+  </contact>
+  <contact name="BRookR">
+    <row>7</row>
+    <column>7</column>
+    <display>img id = 'BRookR',  src='pieces/Black_Rook.png', height=38 width=38</display>
+  </contact>
+</contacts>
+

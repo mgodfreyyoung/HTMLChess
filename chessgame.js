@@ -17,10 +17,38 @@ var whiteTaken = [];
 var blackTaken = [];
 var whosTurn = 'B';
 
+var html5_audiotypes = { 
+    "mp3": "audio/mpeg",
+    "ogg": "audio/ogg",
+}
+var clicksound = createsoundbite("click.ogg", "click.mp3");
+
+function createsoundbite(sound) {
+    var html5audio = document.createElement('audio')
+    if (html5audio.canPlayType) { //check support for HTML5 audio
+        for (var i = 0; i < arguments.length; i++) {
+            var sourceel = document.createElement('source')
+            sourceel.setAttribute('src', arguments[i])
+            if (arguments[i].match(/\.(\w+)$/i))
+                sourceel.setAttribute('type', html5_audiotypes[RegExp.$1])
+            html5audio.appendChild(sourceel)
+        }
+        html5audio.load()
+        html5audio.playclip = function () {
+            html5audio.pause()
+            html5audio.currentTime = 0
+            html5audio.play()
+        }
+        return html5audio
+    }
+    else {
+        return { playclip: function () { throw new Error("No Support for HTML5 audio (at least not .ogg or .mp3)") } }
+    }
+}
+
 // the following block is the variables to change the positions of the pieces...I went with simple letters to insure browser compatiablity...
 // create object literal array for chesspiece......the following row and column values can be modified to move the pieces.....
 var pieces = [];
-resetPieces();
 
 function showChessboard() {
     getCookie();
@@ -145,8 +173,6 @@ function writeNames() {
         namesVar2.innerHTML = firstPlayer;
     }
     var countDiv = document.getElementById("chessboardDiv");
-    resetPieces();
-    countDiv.innerHTML = writeboard();
     addClickHandlers();
 
 }
@@ -184,182 +210,11 @@ function getCookie() {
     all = list[1];
     var timeStamp = document.getElementById("timestamp");
     timeStamp.innerHTML = "Name and last login date: " + all;
-    var Link = document.getElementById("link");
-    link.innerHTML = '<a href="cookieCheck.html">cookieCheck.html </a>';
-
-}
-
-
-
-
-
-function resetPieces() {
-	pieces = [{
-		row : 0,
-		column : 0,
-		piece : "WRookL",
-		display : "<img id = 'WRookL',  src='pieces/White_Rook.png', height=38 width=38>"
-	}, {
-		row : 0,
-		column : 1,
-		piece : "WKnightL",
-		display : "<img id = 'WKnightL',  src='pieces/White_Knight.png', height=38 width=38>"
-	}, {
-		row : 5,
-		column : 2,
-		piece : "WBishopL",
-		display : "<img id = 'WBishopL',  src='pieces/White_Bishop.png', height=38 width=38>"
-	}, {
-		row : 0,
-		column : 3,
-		piece : "WQueen",
-		display : "<img id = 'WQuuen',  src='pieces/White_Queen.png', height=38 width=38>"
-	}, {
-		row : 0,
-		column : 4,
-		piece : "WKing",
-		display : "<img id = 'WKing',  src='pieces/White_King.png', height=38 width=38>"
-	}, {
-		row : 0,
-		column : 5,
-		piece : "WBishopR",
-		display : "<img id = 'WBishopR',  src='pieces/White_Bishop.png', height=38 width=38>"
-	}, {
-		row : 0,
-		column : 6,
-		piece : "WKnightR",
-		display : "<img id = 'WknightR',  src='pieces/White_Knight.png', height=38 width=38>"
-	}, {
-		row : 0,
-		column : 7,
-		piece : "WRookR",
-		display : "<img id = 'WRookR',  src='pieces/White_Rook.png', height=38 width=38>"
-	},{
-		row : 1,
-		column : 0,
-		piece : "WPawn1",
-		display : "<img id = 'WPawn1', src='pieces/White_Pawn.png', height=38 width=38>"
-	}, {
-		row : 1,
-		column : 1,
-		piece : "WPawn2",
-		display : "<img id = 'WPawn2', src='pieces/White_Pawn.png', height=38 width=38>"
-	}, {
-		row : 1,
-		column : 2,
-		piece : "WPawn3",
-		display : "<img id = 'WPawn3', src='pieces/White_Pawn.png', height=38 width=38>"
-	}, {
-		row : 1,
-		column : 3,
-		piece : "WPawn4",
-		display : "<img id = 'WPawn4',  src='pieces/White_Pawn.png', height=38 width=38>"
-	}, {
-		row : 1,
-		column : 4,
-		piece : "WPawn5",
-		display : "<img id = 'WPawn5',  src='pieces/White_Pawn.png', height=38 width=38>"
-	}, {
-		row : 1,
-		column : 5,
-		piece : "WPawn6",
-		display : "<img id = 'WPawn6',  src='pieces/White_Pawn.png', height=38 width=38>"
-	}, {
-		row : 1,
-		column : 6,
-		piece : "WPawn7",
-		display : "<img id = 'WPawn7',  src='pieces/White_Pawn.png', height=38 width=38>"
-	}, {
-		row : 1,
-		column : 7,
-		piece : "WPawn8",
-		display : "<img id = 'WPawn8',  src='pieces/White_Pawn.png', height=38 width=38>"
-	}, {
-		row : 6,
-		column : 0,
-		piece : "BPawn1",
-		display : "<img id = 'BPawn1', src='pieces/Black_Pawn.png', height=38 width=38>"
-	}, {
-		row : 6,
-		column : 1,
-		piece : "BPawn2",
-		display : "<img id = 'BPawn2',  src='pieces/Black_Pawn.png', height=38 width=38>"
-	}, {
-		row : 6,
-		column : 2,
-		piece : "BPawn3",
-		display : "<img id = 'BPawn3',  src='pieces/Black_Pawn.png', height=38 width=38>"
-	}, {
-		row : 6,
-		column : 3,
-		piece : "BPawn4",
-		display : "<img  id = 'BPawn4', src='pieces/Black_Pawn.png', height=38 width=38>"
-	},{
-		row : 6,
-		column : 4,
-		piece : "BPawn5",
-		display : "<img id = 'BPawn5',  src='pieces/Black_Pawn.png', height=38 width=38>"
-	}, {
-		row : 6,
-		column : 5,
-		piece : "BPawn6",
-		display : "<img id = 'BPawn6',  src='pieces/Black_Pawn.png', height=38 width=38>"
-	}, {
-		row : 6,
-		column : 6,
-		piece : "BPawn7",
-		display : "<img id = 'BPawn7',  src='pieces/Black_Pawn.png', height=38 width=38>"
-	}, {
-		row : 6,
-		column : 7,
-		piece : "BPawn8",
-		display : "<img id = 'BPawn8',  src='pieces/Black_Pawn.png', height=38 width=38>"
-	},{
-		row : 4,
-		column : 4,
-		piece : "BRookL",
-		display : "<img id = 'BrookL',  src='pieces/Black_Rook.png', height=38 width=38>"
-	}, {
-		row : 7,
-		column : 1,
-		piece : "BKnightL",
-		display : "<img id = 'BKnightL',  src='pieces/Black_Knight.png', height=38 width=38>"
-	}, {
-		row : 7,
-		column : 2,
-		piece : "BBishopL",
-		display : "<img id = 'BBishopL',  src='pieces/Black_Bishop.png', height=38 width=38>"
-	}, {
-		row : 7,
-		column : 3,
-		piece : "BQueen",
-		display : "<img id = 'BQueen',  src='pieces/Black_Queen.png', height=38 width=38>"
-	}, {
-		row : 7,
-		column : 4,
-		piece : "BKing",
-		display : "<img id = 'BKing',  src='pieces/Black_King.png', height=38 width=38>"
-	}, {
-		row : 7,
-		column : 5,
-		piece : "BBishopR",
-		display : "<img id = 'BBishopR',  src='pieces/Black_Bishop.png', height=38 width=38>"
-	}, {
-		row : 7,
-		column : 6,
-		piece : "BKnightR",
-		display : "<img id = 'BKnightR',  src='pieces/Black_Knight.png', height=38 width=38>"
-	}, {
-		row : 7,
-		column : 7,
-		piece : "BRookR",
-		display : "<img id = 'BRookR',  src='pieces/Black_Rook.png', height=38 width=38>"
-	}]
 }
 
 function getXML() {
 	var request = new XMLHttpRequest();
-    request.open("GET", "XMLdata.xml", false);
+    request.open("GET", "InitialSetupXMLdata.xml", false);
     request.send(null);
     var xmldoc = request.responseXML;
     var xmlrows = xmldoc.getElementsByTagName("contact");
@@ -405,6 +260,7 @@ function addPosition() {
     if (clickedRow == row && clickedCol == col){
     	cell.id = '';
     	resetClicked = true;
+        clicksound.playclip()
     	moveList = []
 
     }
@@ -417,7 +273,8 @@ function addPosition() {
         		clickedRow = row;
         		clickedCol = col;
         		clickedCell = cell;
- 				cell.id = "Clicked";   
+ 				cell.id = "Clicked";
+                clicksound.playclip()   
             	tester = pieces[p].piece;
            }
            	}
@@ -429,6 +286,7 @@ function addPosition() {
     	for (x in moveList){
     		if (moveList[x].row == row && moveList[x].col == col){
 			tryMove(tester,col,row,gridTable,cell)
+            clicksound.playclip()
 			moveList = [];
 			if (whosTurn == 'W'){
 				whosTurn = 'B'
@@ -925,7 +783,6 @@ function pieceValid(p,col,row){
 				moveList.push({row: row - 2, col: col + 1})
 		}
 	}
-	
 	///  Kings
 	if (str =='BKing' || str == 'WKing'){
 		if (row < 7)
@@ -1026,9 +883,15 @@ function tryMove(tester,col,row,gridTable,cell){
 		for (x in pieces){
 			if (pieces[x].row == row && pieces[x].column == col){
 				if (whosTurn == 'B'){
+                if (pieces[x].piece == 'WKing'){
+                alert("Black Wins...Press F5 to reset board and play again")
+                }
 				whiteTaken.push({row: row, col: col, piece: pieces[x].piece});
 				}
 				if (whosTurn == 'W'){
+                if (pieces[x].piece == 'BKing'){
+                alert("White Wins...Press F5 to reset board and play again")
+                }
 				blackTaken.push({row: row, col: col, piece: pieces[x].piece});
 				}
 				for (y in pieces){
